@@ -11,7 +11,7 @@ if ($_SESSION["username"] !== "house-778") {
 }
 
 if (file_exists("/var/www/house-778/.env")) {
-    $lines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $lines = file("/var/www/house-778/.env", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     foreach ($lines as $line) {
         if (strpos(trim($line), '#') === 0) continue;
         putenv($line);
