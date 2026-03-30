@@ -7,13 +7,7 @@ session_set_cookie_params(0, '/', 'house-778.theorangecow.org');
 session_start();
 define('BASE_PATH', __DIR__ . '/../');
 
-if (file_exists(__DIR__ . '/.env')) {
-    $lines = file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        if (strpos(trim($line), '#') === 0) continue;
-        putenv($line);
-    }
-}
+
 
 include 'connect.php';
 
