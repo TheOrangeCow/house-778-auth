@@ -176,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_account'])) {
             
             <?php 
             if ($_SESSION["username"] == "house-778") {
-                echo "<br><a href='https://admin.house-778.theorangecow.org/accounts/'>Manage other users</a>";
+                echo "<br><a href='https://auth.house-778.theorangecow.org/account/users.php'>Manage other users</a>";
             }
             ?>
         </div>
