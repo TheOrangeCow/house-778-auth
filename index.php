@@ -5,10 +5,6 @@ define('BASE_PATH', __DIR__ . '/../');
 
 include 'connect.php';
 
-//if (isset($_SESSION["user_id"])) {
-//    header("Location: https://house-778.org/home.php");
-//    exit;
-//}
 
 function generateUsername() {
     $randomNumber = rand(1000, 9999);
