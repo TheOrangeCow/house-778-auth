@@ -14,7 +14,7 @@ function generateVerificationCode($length = 6) {
 function sendVerificationEmail($toEmail, $code) {
     $subject = "Email Verification Code";
     $message = "Your verification code is: $code\n\nPlease enter this code to confirm your email change.";
-    $headers = "From: house-778@house-778.org\r\n";
+    $headers = "From: coworange9@gmail.com\r\n";
     return mail($toEmail, $subject, $message, $headers);
 }
 
