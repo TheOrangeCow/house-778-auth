@@ -77,18 +77,7 @@ if (isset($_POST['signIn'])) {
             <a href="fogoten.php">Forgotten your password?</a>
         </form>
     </div>
-    <div id="popup2" class="popup">
-        <div class="popup-content">
-            <span class="popup-close" id="closePopupBtn">&times;</span>
-            <h2>Important Update</h2>
-            <p>We recently moved our databases to a new system. As part of this update, all user data including login information, themes, and favorites has been reset.
-You'll need to create a new account and set up your preferences again.
-We’re sorry for the inconvenience and appreciate your understanding as we work to improve your experience!
 
-</p>
-        </div>
-
-    </div>
 
     <script src="https://house-778.theorangecow.org/script.js"></script>
     <script src="popup.js"></script>
