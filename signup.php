@@ -15,7 +15,7 @@ function send_confirmation_email($email, $code) {
         $mail->Host = 'smtp.hostinger.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'house-778@house-778.org';
-        $mail->Password = 'pitb4c&sO';
+        $mail->Password = '';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
 
