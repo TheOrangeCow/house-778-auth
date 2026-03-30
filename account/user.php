@@ -50,16 +50,6 @@ if ($userId) {
     }
     $stmt->close();
 
-    $stmt = $mysqli->prepare("SELECT user_id FROM suspended_users WHERE user_id = ?");
-    $stmt->bind_param("i", $userId);
-    $stmt->execute();
-    $suspendedResult = $stmt->get_result();
-    
-    if ($suspendedResult->num_rows > 0) {
-        $suspendedUsers[] = $userId;
-    }
-
-    $stmt->close();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['edit_username'])) {
