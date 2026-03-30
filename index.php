@@ -1,11 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-session_set_cookie_params(0, '/', 'house-778.theorangecow.org');
 session_start();
-define('BASE_PATH', __DIR__ . '/../');
 
 
 
@@ -40,7 +34,7 @@ if (isset($_POST['signIn'])) {
         $row = $result->fetch_assoc();
         $_SESSION['username'] = $row['username'];
         $_SESSION['user_id'] = $row['user_id'];
-        header("Location: https://house-778.theorangecow.org");
+        header("Location: https://house-778.theorangecow.org/home.php");
         exit();
     } else {
         $error = "Not Found, Incorrect Username or Password";
@@ -74,7 +68,7 @@ if (isset($_POST['signIn'])) {
             <a href="fogoten.php">Forgotten your password?</a>
         </form>
     </div>
-            <!--div id="popup2" class="popup">
+    <div id="popup2" class="popup">
         <div class="popup-content">
             <span class="popup-close" id="closePopupBtn">&times;</span>
             <h2>Important Update</h2>
@@ -83,7 +77,7 @@ You'll need to create a new account and set up your preferences again.
 We’re sorry for the inconvenience and appreciate your understanding as we work to improve your experience!
 
 </p>
-        </div-->
+        </div>
 
     </div>
 
