@@ -62,23 +62,6 @@ if ($userId) {
     $stmt->close();
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (isset($_POST['suspend_user'])) {
-            $suspensionReason = $_POST['suspension_reason'] ?? 'No reason provided';
-            $stmt = $mysqli->prepare("INSERT INTO suspended_users (user_id, reason, timestamp) VALUES (?, ?, ?)");
-            $stmt->bind_param("iss", $userId, $suspensionReason, date('Y-m-d H:i:s'));
-            $stmt->execute();
-            $stmt->close();
-            $resolt = "User with ID '$userId' has been suspended for: $suspensionReason";
-        }
-
-        if (isset($_POST['unsuspend_user'])) {
-            $stmt = $mysqli->prepare("DELETE FROM suspended_users WHERE user_id = ?");
-            $stmt->bind_param("i", $userId);
-            $stmt->execute();
-            $stmt->close();
-            $resolt = "User with ID '$userId' has been unsuspended.";
-        }
-
         if (isset($_POST['edit_username'])) {
             $newUsername = $_POST['new_username'] ?? null;
             if ($newUsername) {
@@ -171,19 +154,6 @@ $mysqli->close();
             <button type="submit" name="edit_password">Update Password</button>
         </form>
         
-        <h2>Suspend or Unsuspend User</h2>
-        <?php if (!in_array($userId, $suspendedUsers)): ?>
-            <form method="POST">
-                <label for="suspension_reason">Reason for Suspension:</label>
-                <input type="text" name="suspension_reason" id="suspension_reason" required>
-                <br>
-                <button type="submit" name="suspend_user" onclick="return confirm('Are you sure you want to suspend this user?');">Suspend User</button>
-            </form>
-        <?php else: ?>
-            <form method="POST">
-                <button type="submit" name="unsuspend_user" onclick="return confirm('Are you sure you want to unsuspend this user?');">Unsuspend User</button>
-            </form>
-        <?php endif; ?>
         
         <h2>Delete User Account</h2>
         <form method="POST">
