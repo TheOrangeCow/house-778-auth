@@ -50,15 +50,6 @@ if ($userId) {
     }
     $stmt->close();
 
-    $stmt = $mysqli->prepare("SELECT timestamp FROM login_logs WHERE user_id = ?");
-    $stmt->bind_param("i", $userId);
-    $stmt->execute();
-    $loginLogsResult = $stmt->get_result();
-    
-    if ($loginLogsResult->num_rows > 0) {
-        $lastLoginTimestamp = $loginLogsResult->fetch_assoc()['timestamp'];
-    }
-
     $stmt = $mysqli->prepare("SELECT user_id FROM suspended_users WHERE user_id = ?");
     $stmt->bind_param("i", $userId);
     $stmt->execute();
@@ -136,13 +127,7 @@ if ($userId) {
     die('User ID not found.');
 }
 
-$isOldLogin = false;
-if ($lastLoginTimestamp) {
-    $lastLoginDate = new DateTime($lastLoginTimestamp);
-    $currentDate = new DateTime();
-    $interval = $currentDate->diff($lastLoginDate);
-    $isOldLogin = $interval->days > 30;
-}
+
 
 $mysqli->close();
 ?>
@@ -169,16 +154,6 @@ $mysqli->close();
         <a href="index.php">Home</a>
         <p><?php echo htmlspecialchars($resolt); ?></p>
         
-        <h2>Last Login</h2>
-        <p style="color: <?php echo $isOldLogin ? 'red' : 'black'; ?>">
-            <?php 
-            if ($lastLoginTimestamp) {
-                echo "Last login: " . htmlspecialchars($lastLoginTimestamp);
-            } else {
-                echo "No login record found.";
-            }
-            ?>
-        </p>
         
         <h2>Edit Username</h2>
         <form method="POST">
