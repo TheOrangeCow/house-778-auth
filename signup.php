@@ -1,10 +1,14 @@
-<!--?php 
+<?php 
 session_start();
-
-
-
 include 'connect.php';
-require '/home/u946651547/vendor/autoload.php'; 
+if (file_exists(__DIR__ . '/.env')) {
+    foreach (file(__DIR__ . '/.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line) {
+        if (strpos(trim($line), '#') === 0) continue;
+        putenv($line);
+    }
+}
+
+require __DIR__ . '/vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -12,14 +16,15 @@ function send_confirmation_email($email, $code) {
     $mail = new PHPMailer(true);
     try {
         $mail->isSMTP();
-        $mail->Host = 'smtp.hostinger.com';
+        $mail->SMTPDebug = 0;
+        $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'house-778@house-778.org';
-        $mail->Password = '';
+        $mail->Username = 'coworange9@gmail.com';
+        $mail->Password = getenv('GMAIL_APP_PASS');
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
 
-        $mail->setFrom('house-778@house-778.org', 'House 778');
+        $mail->setFrom('coworange9@gmail.com', 'House-778');
         $mail->addAddress($email);
 
         $mail->isHTML(true);
@@ -29,6 +34,7 @@ function send_confirmation_email($email, $code) {
         $mail->send();
         return true;
     } catch (Exception $e) {
+        error_log("Mailer Error: " . $mail->ErrorInfo);
         return false;
     }
 }
@@ -156,7 +162,4 @@ if (isset($_POST['confirmCode'])) {
 
 <script src="https://house-778.theorangecow.org/script.js"></script>
 </body>
-</html-->
-
-
-<h1> This page isent owrking at the moment </h1>
+</html>
