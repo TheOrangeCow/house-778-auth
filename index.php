@@ -8,12 +8,7 @@ session_set_cookie_params([
     'samesite' => 'Lax'
 ]);
 session_start();
-
-
-
-
 include 'connect.php';
-
 
 function generateUsername() {
     $randomNumber = rand(1000, 9999);
@@ -21,11 +16,9 @@ function generateUsername() {
 }
 
 $error = "";
-
 if (isset($_POST['signIn'])) {
     $username = trim($_POST['username']);
     $password = $_POST['password'];
-
     if ($username === '' && $password === '') {
         $username = generateUsername();
         $_SESSION["username"] = $username;
@@ -33,12 +26,9 @@ if (isset($_POST['signIn'])) {
         header("Location: https://house-778.theorangecow.org/home.php");
         exit;
     }
-
     $password_encoded = base64_encode($password);
-
     $sql = "SELECT * FROM users WHERE username='$username' AND password='$password_encoded'";
     $result = $conn->query($sql);
-
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $_SESSION['username'] = $row['username'];
@@ -50,7 +40,6 @@ if (isset($_POST['signIn'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,16 +65,17 @@ if (isset($_POST['signIn'])) {
             <a href="signup.php">Don't have an account yet?</a><br>
             <a href="fogoten.php">Forgotten your password?</a>
         </form>
+
+        <div class="cow-divider">or</div>
+
+        <a href="cow_login.php" class="cow-btn">Login with Cow</a>
     </div>
-
-
     <script src="https://house-778.theorangecow.org/script.js"></script>
     <script src="popup.js"></script>
     <script>
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
     const submitBtn = document.getElementById('submitBtn');
-
     function updateButtonText() {
         if (usernameInput.value.trim() !== '' || passwordInput.value.trim() !== '') {
             submitBtn.value = 'Login';
@@ -93,10 +83,8 @@ if (isset($_POST['signIn'])) {
             submitBtn.value = 'Sign in as Guest';
         }
     }
-
     usernameInput.addEventListener('input', updateButtonText);
     passwordInput.addEventListener('input', updateButtonText);
-
     </script>
 </body>
 </html>
