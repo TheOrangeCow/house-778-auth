@@ -62,9 +62,6 @@ if ($check && $check->num_rows > 0) {
     $maxRow     = $maxResult->fetch_assoc();
     $new_user_id = ($maxRow['max_user_id'] === NULL) ? 1 : $maxRow['max_user_id'] + 1;
 
-    $password_encoded = base64_encode($password);
-    $sql = "SELECT * FROM users WHERE username='$username' AND password='$password_encoded'";
-    
     $conn->query($insertQuery);
 
     $_SESSION['username'] = $cow_username;
