@@ -10,6 +10,11 @@ session_set_cookie_params([
 session_start();
 include 'connect.php';
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+
+
 $COW_ACCOUNTS      = "https://theorangecow.org";
 $COW_CLIENT_ID     = "house-778";
 $COW_CLIENT_SECRET = "dev-secret-house778"; //getenv('COW_CLIENT_SECRET');
