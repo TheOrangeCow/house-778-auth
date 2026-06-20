@@ -10,6 +10,9 @@ session_set_cookie_params([
 session_start();
 include 'connect.php';
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
 
 $COW_ACCOUNTS      = "https://theorangecow.org";
@@ -61,7 +64,7 @@ if ($check && $check->num_rows > 0) {
 
     $password_encoded = base64_encode($password);
     $sql = "SELECT * FROM users WHERE username='$username' AND password='$password_encoded'";
-
+    
     $conn->query($insertQuery);
 
     $_SESSION['username'] = $cow_username;
