@@ -10,5 +10,5 @@ session_set_cookie_params([
 session_start();
 
 session_destroy();
-header("location: https://house-778.theorangecow.org");
+header("location: https://auth.house-778.theorangecow.org");
 ?>
